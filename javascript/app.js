@@ -93,10 +93,11 @@ function stumpPixel(e) {
 
       color = currentColor,
 
-      slabX = Math.round((mouseX - (opts.pixelSize / 4)) / (winW / horizontalAmount)),
-      slabY = Math.round((mouseY - (opts.pixelSize / 4)) / (winH / verticalAmount));
+      slabX = Math.round( (mouseX - (opts.pixelSize / 4)) / (winW / horizontalAmount) ),
+      slabY = Math.round( (mouseY - (opts.pixelSize / 4)) / (winH / verticalAmount) );
 
-  pictureData[slabY][slabX].redraw(currentColor);
+  pictureData[slabY][slabX].redraw(currentColor);;
+  pictureData[slabY][slabX].color = currentColor;
 }
 
 function updateColor(jscolor) {

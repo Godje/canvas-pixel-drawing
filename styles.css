@@ -16,3 +16,7 @@ body {
 .tool-wrapper.opened {
   width: 100vw;
 }
+
+canvas {
+  cursor: crosshair;
+}
