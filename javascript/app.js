@@ -15,7 +15,7 @@ var canvasBody = window.document.getElementById("canvas"),
 
     drawing = false,
 
-    currentColor = "rgba(46, 204, 113, 1.0)";
+    currentColor = "#ff00ff";
 
 function Cell(){
 
@@ -97,4 +97,10 @@ function stumpPixel(e) {
       slabY = Math.round((mouseY - (opts.pixelSize / 4)) / (winH / verticalAmount));
 
   pictureData[slabY][slabX].redraw(currentColor);
+}
+
+function updateColor(jscolor) {
+  var color = document.getElementById("color_pick").value;
+  currentColor = "#" + color;
+  console.log(color);
 }

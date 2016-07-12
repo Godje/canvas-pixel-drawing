@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <title>Pixel Art Drawing Tool</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="javascript/jscolor.min.js"></script>
   </head>
   <body>
+    <div class="tool-wrapper">
+      <input id="color_pick" class="jscolor {onFineChange:'updateColor(this)'}" value="ff00ff"></input>
+    </div>
     <canvas id="canvas"></canvas>
     <script src="javascript/app.js"></script>
   </body>
