@@ -16,7 +16,20 @@ var canvasBody = window.document.getElementById("canvas"),
     tools = [
       "Paint", //Paints the thing
       "Eraser" //Erases the thing (to white)
-    ]
+    ],
+
+    actions = {
+      fill: function(){
+        canvas.fillStyle = currentColor;
+        canvas.fillRect(0,0,winW,winH);
+        return "Filled with "+ currentColor +"";
+      },
+      clear: function(){
+        canvas.fillStyle = "white";
+        canvas.fillRect(0,0,winW,winH);
+        return "Cleared";
+      }
+    },
 
     pressing = false,
     toolNow = tools[0],
@@ -146,14 +159,15 @@ tool_tool.on("click", function(){
   $(this).addClass("selected");
   $(this).siblings().removeClass("selected");
 
-  toolChange($(this));
+  toolChange($(this).attr("id"));
+  console.log($(this).attr("id"))
 })
 
 function toolChange(tool){
   for (var i = 0; i < tools.length; i++) {
-    if(tool.id == tools[i]){
+    if(tool == tools[i].toLowerCase()){
       toolNow = tools[i];
-      console.log(toolNow);
     }
   }
+  console.log(toolNow)
 }
