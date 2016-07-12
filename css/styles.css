@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  overflow-y: auto;
+  position: relative;
+  z-index: 0;
+  display: block;
+  font-family: 'Roboto';
+}
+
+body h1, body h2, body h3, body h4, body h5, body h6, body p {
+  margin: 0;
+}
+
+#tool-wrapper {
+  width: 100%;
+  height: 50px;
+  padding: 3px;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: calc(-100% + 50px);
+  overflow: hidden;
+  transition: left 00.7s ease-in-out;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+#tool-wrapper.opened {
+  left: 0;
+}
+
+#tool-wrapper.opened #arrow .fa {
+  transform: rotateZ(180deg);
+}
+
+#tool-wrapper #arrow {
+  width: 50px;
+  height: 100%;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  order: 1;
+}
+
+#tool-wrapper #arrow .fa {
+  transition: transform 0.6s ease-in-out;
+}
+
+#tool-wrapper #color_pick {
+  width: 44px;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  border-radius: 50%;
+  float: left;
+}
+
+#tool-wrapper #drawing-tools {
+  display: block;
+  position: relative;
+  width: 240px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#tool-wrapper #drawing-tools .tool {
+  height: 46px;
+  cursor: pointer;
+  width: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#tool-wrapper #drawing-tools .tool.selected {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+canvas {
+  cursor: crosshair;
+}

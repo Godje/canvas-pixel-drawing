@@ -3,12 +3,21 @@
   <head>
     <meta charset="UTF-8">
     <title>Pixel Art Drawing Tool</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
     <script src="javascript/jscolor.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
   </head>
   <body>
-    <div class="tool-wrapper">
-      <input id="color_pick" class="jscolor {onFineChange:'updateColor(this)'}" value="ff00ff"></input>
+    <div id="tool-wrapper">
+      <button id="color_pick" class="jscolor {valueElement:null,value:'66ccff',onFineChange:'updateColor(this)'}"></button>
+      <div id="arrow"><span class="fa fa-chevron-right"></span></div>
+      <div id="drawing-tools">
+        Tool:
+        <div class="tool selected" id="paint">Paint</div>
+        <div class="tool" id="eraser">Eraser</div>
+      </div>
     </div>
     <canvas id="canvas"></canvas>
     <script src="javascript/app.js"></script>

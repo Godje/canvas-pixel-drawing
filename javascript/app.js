@@ -13,7 +13,13 @@ var canvasBody = window.document.getElementById("canvas"),
 
     pictureData = [],
 
-    drawing = false,
+    tools = [
+      "Paint", //Paints the thing
+      "Eraser" //Erases the thing (to white)
+    ]
+
+    pressing = false,
+    toolNow = tools[0],
 
     currentColor = "#ff00ff";
 
@@ -29,7 +35,9 @@ Cell.prototype.reset = function () {
   this.x = 0;
   this.y = 0;
 
-  this.color = "rgba(0,0,0,0)";
+  this.scale = 1;
+
+  this.color = "rgba(255,255,255,1)";
 };
 
 Cell.prototype.startPlacement = function (xPos, yPos) {
@@ -46,8 +54,12 @@ Cell.prototype.place = function () {
   canvas.fillRect(this.x, this.y, this.width, this.height);
 };
 
-Cell.prototype.redraw = function (color) {
-  canvas.fillStyle = color;
+Cell.prototype.redraw = function (arg) {
+  if (arg.color){
+    canvas.fillStyle = arg.color;
+  } else {
+    canvas.fillStyle = this.color;
+  }
   canvas.fillRect(this.x, this.y, this.width, this.height);
 }
 
@@ -70,24 +82,7 @@ function startApp(){
 
 startApp()
 
-canvasBody.addEventListener("mousedown", function(e){
-  drawing = true;
-  stumpPixel(e);
-  console.log(e.pageX, e.pageY)
-})
-
-canvasBody.addEventListener("mouseup", function(e){
-  drawing = false;
-  console.log(e.pageX, e.pageY)
-})
-
-canvasBody.addEventListener("mousemove", function(e){
-  if (drawing) {
-    stumpPixel(e)
-  }
-})
-
-function stumpPixel(e) {
+function stumpPixel(e, todo) {
   var mouseX = e.pageX,
       mouseY = e.pageY,
 
@@ -95,13 +90,70 @@ function stumpPixel(e) {
 
       slabX = Math.round( (mouseX - (opts.pixelSize / 4)) / (winW / horizontalAmount) ),
       slabY = Math.round( (mouseY - (opts.pixelSize / 4)) / (winH / verticalAmount) );
-
-  pictureData[slabY][slabX].redraw(currentColor);;
-  pictureData[slabY][slabX].color = currentColor;
+  if (todo == "Paint") {
+    pictureData[slabY][slabX].redraw({color: currentColor});;
+    pictureData[slabY][slabX].color = currentColor;
+  } else if (todo == "Erase") {
+    pictureData[slabY][slabX].redraw("white");
+    pictureData[slabY][slabX].color = "white";
+  }
 }
 
 function updateColor(jscolor) {
-  var color = document.getElementById("color_pick").value;
-  currentColor = "#" + color;
-  console.log(color);
+  var color = document.getElementById("color_pick").textContent;
+  currentColor = "#" + jscolor;
+  console.log(currentColor);
+}
+
+// --
+// EVENT CONTROLLERS
+// --
+
+canvasBody.addEventListener("mousedown", function(e){
+  pressing = true;
+  stumpPixel(e);
+  console.log(e.pageX, e.pageY)
+})
+
+canvasBody.addEventListener("mouseup", function(e){
+  pressing = false;
+  console.log(e.pageX, e.pageY)
+})
+
+//If the mouse is moving and it is clicked that will call the redraw function on each Cell that is in the range
+canvasBody.addEventListener("mousemove", function(e){
+  if (pressing && toolNow == "Paint") {
+    stumpPixel(e, "Paint")
+  } else if (pressing && toolNow == "Eraser") {
+    stumpPixel(e, "Erase")
+  }
+})
+
+
+var toolBoardBody = $("#tool-wrapper"),
+    toolBoardTrigger = $("#arrow"),
+    toolsHolder = $("#drawing-tools"),
+    tool_tool = $("#drawing-tools .tool")
+    tool_paintTool = $("#paint"),
+    tool_eraserTool = $("#eraser"),
+    colorPick = $("#color_pick");
+
+toolBoardTrigger.on("click", function(){
+  toolBoardBody.toggleClass("opened");
+});
+
+tool_tool.on("click", function(){
+  $(this).addClass("selected");
+  $(this).siblings().removeClass("selected");
+
+  toolChange($(this));
+})
+
+function toolChange(tool){
+  for (var i = 0; i < tools.length; i++) {
+    if(tool.id == tools[i]){
+      toolNow = tools[i];
+      console.log(toolNow);
+    }
+  }
 }
