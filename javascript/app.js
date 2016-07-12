@@ -25,9 +25,7 @@ var canvasBody = window.document.getElementById("canvas"),
         return "Filled with "+ currentColor +"";
       },
       clear: function(){
-        canvas.fillStyle = "white";
-        canvas.fillRect(0,0,winW,winH);
-        return "Cleared";
+        canvas.clearRect(0,0,winW,winH);
       }
     },
 
@@ -41,25 +39,18 @@ function Cell(){
   this.reset();
 };
 
-Cell.prototype.reset = function () {
+Cell.prototype.reset = function (xPos, yPos) {
   this.width = opts.pixelSize;
   this.height = opts.pixelSize;
 
-  this.x = 0;
-  this.y = 0;
-
-  this.scale = 1;
-
-  this.color = "rgba(255,255,255,1)";
-};
-
-Cell.prototype.startPlacement = function (xPos, yPos) {
   this.x = xPos * this.width;
   this.y = yPos * this.height;
 
+  this.scale = 1;
+
   this.place();
 
-  return this;
+  this.color = "rgba(0,0,0,0)";
 };
 
 Cell.prototype.place = function () {
@@ -87,12 +78,11 @@ function startApp(){
 
   for ( var i = 0; i < verticalAmount; i++ ) {
     for( var f = 0; f < horizontalAmount; f++ ) {
-      pictureData[i][f].startPlacement(f, i)
+      pictureData[i][f].reset(f, i)
       //console.log(pictureData[i][f].startPlacement(f, i))
     }
   }
 }
-
 startApp()
 
 function stumpPixel(e, todo) {
@@ -103,12 +93,17 @@ function stumpPixel(e, todo) {
 
       slabX = Math.round( (mouseX - (opts.pixelSize / 4)) / (winW / horizontalAmount) ),
       slabY = Math.round( (mouseY - (opts.pixelSize / 4)) / (winH / verticalAmount) );
+
   if (todo == "Paint") {
     pictureData[slabY][slabX].redraw({color: currentColor});;
     pictureData[slabY][slabX].color = currentColor;
+
   } else if (todo == "Erase") {
-    pictureData[slabY][slabX].redraw("white");
-    pictureData[slabY][slabX].color = "white";
+    actions.clear();
+    pictureData[slabY][slabX].color = "rgba(0,0,0,0)";
+    for(var i = 0; i < pictureData.length; i++){
+      pictureData[i].map( function(Cell) { Cell.place() } )
+    }
   }
 }
 
@@ -118,13 +113,19 @@ function updateColor(jscolor) {
   console.log(currentColor);
 }
 
+
+
 // --
 // EVENT CONTROLLERS
 // --
 
 canvasBody.addEventListener("mousedown", function(e){
   pressing = true;
-  stumpPixel(e);
+  if (pressing && toolNow == "Paint") {
+    stumpPixel(e, "Paint")
+  } else if (pressing && toolNow == "Eraser") {
+    stumpPixel(e, "Erase")
+  }
   console.log(e.pageX, e.pageY)
 })
 
