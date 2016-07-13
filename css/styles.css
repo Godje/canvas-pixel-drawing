@@ -1,3 +1,4 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans";
 * {
   box-sizing: border-box;
 }
@@ -9,7 +10,7 @@ body {
   position: relative;
   z-index: 0;
   display: block;
-  font-family: 'Roboto';
+  font-family: 'Open Sans';
 }
 
 body h1, body h2, body h3, body h4, body h5, body h6, body p {
@@ -59,6 +60,32 @@ canvas {
   top: 50%;
   left: 50%;
   transform: translateY(-50%) translateX(-50%) rotateZ(-45deg);
+}
+
+.modal_window .modal_btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  margin-left: calc(25% - 50px);
+  margin-right: calc(25% - 50px);
+  float: left;
+  border: 0;
+  outline: 0;
+  width: 100px;
+  height: 50px;
+  background-color: #3498db;
+  text-decoration: none;
+  color: white;
+}
+
+.modal_window .modal_btn.modal-confirm {
+  background-color: #2ecc71;
+}
+
+.modal_window .modal_btn.modal-cancel {
+  background-color: #e74c3c;
 }
 
 #tool-wrapper {
