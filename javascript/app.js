@@ -23,6 +23,10 @@ var canvasBody = window.document.getElementById("canvas"),
         canvas.fillStyle = currentColor;
         canvas.fillRect(0,0,winW,winH);
 
+        for(var i = 0; i < pictureData.length; i++) {
+          pictureData[i].map( function( Cell ){ Cell.color = currentColor; Cell.redraw() });
+        }
+
         return "Filled with "+ currentColor +"";
       },
       wipe: function(){
