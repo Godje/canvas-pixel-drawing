@@ -62,6 +62,32 @@ canvas {
   transform: translateY(-50%) translateX(-50%) rotateZ(-45deg);
 }
 
+.modal_window .modal_content {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.modal_window .modal_content p {
+  margin: 20px;
+  line-height: 160%;
+}
+
+.modal_window .modal_input[type="text"] {
+  width: 200px;
+  border: 0;
+  background-color: #f3f3f3;
+  padding: 17px;
+}
+
+.modal_window .modal_label {
+  width: 100px;
+  margin-right: 10px;
+}
+
+.modal_window .setting-item {
+  margin: 10px;
+}
+
 .modal_window .modal_btn {
   display: flex;
   flex-direction: column;

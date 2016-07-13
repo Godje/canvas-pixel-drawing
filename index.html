@@ -35,7 +35,13 @@
     <canvas id="canvas"></canvas>
     <div class="modal_window remodal" data-remodal-id="modal-settings">
       <a href="#" data-remodal-action="close" class="modal-close"></a>
-      <a href="#" data-remodal-action="confirm" class="modal_btn modal-confirm">Save</a>
+      <div class="modal_content">
+        <p>
+          By saving your settings, you understand, that the picture you already have will be wiped, with no chance to undo.
+        </p>
+        <div class="setting-item"><label class="modal_label" for="pixel_size_input">Pixel Size: </label><input id="pixel_size_input" type="text" class="modal_input input_settings" value="20" data-default-value="20"/></div>
+      </div>
+      <a href="#" data-remodal-action="confirm" onClick="callRestart()" class="modal_btn modal-confirm">Save</a>
       <a href="#" data-remodal-action="cancel" class="modal_btn modal-cancel">Cancel</a>
     </div>
     <div class="modal_window remodal" data-remodal-id="wipe-confirmation">

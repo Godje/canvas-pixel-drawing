@@ -81,6 +81,7 @@ Cell.prototype.redraw = function (arg) {
 }
 
 function startApp(vA, hA){
+  console.log(vA, hA)
   for(var i = 0; i < vA; i++){
     var lineData = [];
     for( var f = 0; f < hA; f++){
@@ -88,7 +89,6 @@ function startApp(vA, hA){
     }
     pictureData.push(lineData)
   }
-
   for ( var i = 0; i < vA; i++ ) {
     for( var f = 0; f < hA; f++ ) {
       pictureData[i][f].reset(f, i)
@@ -98,19 +98,30 @@ function startApp(vA, hA){
 }
 
 function restartApp(arg){
-  finishApp()
-  if(arg != undefined){
-    console.log()
-  }
-  // verticalAmount = Math.floor(winH / opts.pixelSize);
-  // horizontalAmount = Math.floor(winW / opts.pixelSize);
-  startApp()
+  finishApp();
+
+  if(arg != undefined && typeOf(arg) == "object"){
+    if(arg.pixelSize){
+      opts.pixelSize = arg.pixelSize;
+    }
+    console.log(opts.pixelSize)
+  } else {
+    console.log("App reinitialized with the same settings");
+  };
+
+  console.log("w");
+  verticalAmount = Math.floor(winH / opts.pixelSize);
+  horizontalAmount = Math.floor(winW / opts.pixelSize);
+
+  startApp(verticalAmount, horizontalAmount);
+  console.log("App reinitialized")
 }
 
 function finishApp(){
-  canvas.clear();
-  canvas.wipe();
+  actions.clear();
+  actions.wipe();
   pictureData = [];
+  console.log("App finished. All entities removed")
 }
 
 startApp(verticalAmount, horizontalAmount)
@@ -150,7 +161,13 @@ function updateColor(jscolor) {
   console.log(jscolor);
 }
 
+// --
+// Help functions
+// --
 
+function typeOf(arg){
+  return typeof arg;
+}
 
 // --
 // EVENT CONTROLLERS
@@ -191,7 +208,9 @@ var toolBoardBody = $("#tool-wrapper"),
     tool_tool = $("#drawing-tools .tool")
     tool_paintTool = $("#paint"),
     tool_eraserTool = $("#eraser"),
-    colorPick = $("#color_pick");
+    colorPick = $("#color_pick"),
+
+    setting_pixelSize = $("#pixel_size_input");
 
 toolBoardTrigger.on("click", function(){
   toolBoardBody.toggleClass("opened");
@@ -212,4 +231,12 @@ function toolChange(tool){
     }
   }
   console.log(toolNow)
+}
+
+function callRestart(){
+  var new_pixelSize = $("#pixel_size_input").val();
+
+  console.log(new_pixelSize);
+  restartApp({pixelSize: new_pixelSize});
+
 }
