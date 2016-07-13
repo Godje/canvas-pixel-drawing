@@ -1,9 +1,44 @@
-//#settings-modal
-  width: 100vw
-  height: 100vh
-  overflow: hidden
-  overflow-y: auto
+.modal_window
+  .modal-close
+    width: 50px
+    height: 50px
 
-  position: fixed
-  top: 0
-  left: 0
+    background-color: transparent
+    position: relative
+    display: block
+
+    color: black
+    border: 2px solid black
+    border-radius:50%
+
+    margin: auto
+    transition: transform 0.2s
+    &:hover
+      transform: rotateZ(90deg)
+
+    &::after
+      content: ""
+      width: 30px
+      height: 2px
+
+      background-color: black
+
+      display: block
+      position: absolute
+      top: 50%
+      left: 50%
+
+      transform: translateY(-50%) translateX(-50%) rotateZ(45deg)
+
+    &::before
+      content: ""
+      width: 30px
+      height: 2px
+
+      background-color: black
+      display: block
+      position: absolute
+      top: 50%
+      left: 50%
+
+      transform: translateY(-50%) translateX(-50%) rotateZ(-45deg)

@@ -20,6 +20,47 @@ canvas {
   cursor: crosshair;
 }
 
+.modal_window .modal-close {
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  position: relative;
+  display: block;
+  color: black;
+  border: 2px solid black;
+  border-radius: 50%;
+  margin: auto;
+  transition: transform 0.2s;
+}
+
+.modal_window .modal-close:hover {
+  transform: rotateZ(90deg);
+}
+
+.modal_window .modal-close::after {
+  content: "";
+  width: 30px;
+  height: 2px;
+  background-color: black;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%) rotateZ(45deg);
+}
+
+.modal_window .modal-close::before {
+  content: "";
+  width: 30px;
+  height: 2px;
+  background-color: black;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%) rotateZ(-45deg);
+}
+
 #tool-wrapper {
   width: 100%;
   height: 50px;

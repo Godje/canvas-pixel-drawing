@@ -79,23 +79,40 @@ Cell.prototype.redraw = function (arg) {
   canvas.fillRect(this.x, this.y, this.width, this.height);
 }
 
-function startApp(){
-  for(var i = 0; i < verticalAmount; i++){
+function startApp(vA, hA){
+  for(var i = 0; i < vA; i++){
     var lineData = [];
-    for( var f = 0; f < horizontalAmount; f++){
+    for( var f = 0; f < hA; f++){
       lineData.push(new Cell);
     }
     pictureData.push(lineData)
   }
 
-  for ( var i = 0; i < verticalAmount; i++ ) {
-    for( var f = 0; f < horizontalAmount; f++ ) {
+  for ( var i = 0; i < vA; i++ ) {
+    for( var f = 0; f < hA; f++ ) {
       pictureData[i][f].reset(f, i)
       //console.log(pictureData[i][f].startPlacement(f, i))
     }
   }
 }
-startApp()
+
+function restartApp(arg){
+  finishApp()
+  if(arg != undefined){
+    console.log()
+  }
+  // verticalAmount = Math.floor(winH / opts.pixelSize);
+  // horizontalAmount = Math.floor(winW / opts.pixelSize);
+  startApp()
+}
+
+function finishApp(){
+  canvas.clear();
+  canvas.wipe();
+  pictureData = [];
+}
+
+startApp(verticalAmount, horizontalAmount)
 
 function stumpPixel(e, todo) {
   var mouseX = e.pageX,

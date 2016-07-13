@@ -5,10 +5,13 @@
     <title>Pixel Art Drawing Tool</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/imp/animate.min.css">
+    <link rel="stylesheet" href="css/imp/remodal.css">
+    <link rel="stylesheet" href="css/imp/remodal-default-theme.css">
+    <link rel="stylesheet" href="css/styles.css">
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="javascript/jscolor.min.js"></script>
+    <script src="javascript/remodal.js"></script>
   </head>
   <body>
     <div id="tool-wrapper">
@@ -19,16 +22,25 @@
         <div class="tool selected" id="paint">Paint</div>
         <div class="tool" id="eraser">Eraser</div>
       </div>
-      <a id="settings-btn" href="#modal-02">
+      <a href="#" id="settings-btn" class="remodals" data-remodal-target="modal-settings">
         <div class="fa fa-cog"></div> Settings
       </a>
       <nav id="actions" class="dropdown">
         <li disabled><div class="fa fa-chevron-down"></div> Actions </li>
-        <li class="action" onClick="actions.wipe()">Wipe</li>
+        <li class="action" data-remodal-target="wipe-confirmation">Wipe</li>
         <li class="action" onClick="actions.fill()">Fill</li>
       </nav>
     </div>
     <canvas id="canvas"></canvas>
+    <div class="modal_window remodal" data-remodal-id="modal-settings">
+      <a href="#" data-remodal-action="close" class="modal-close"></a>
+      <a href="#" data-remodal-action="confirm" class="modal_btn modal-confirm">Save</a>
+      <a href="#" data-remodal-action="cancel" class="modal_btn modal-cancel">Cancel</a>
+    </div>
+    <div class="modal_window remodal" data-remodal-id="wipe-confirmation">
+      <a href="#" data-remodal-action="confirm" class="modal_btn modal-confirm" onClick="actions.wipe()">Wipe</a>
+      <a href="#" data-remodal-action="cancel" class="modal_btn modal-cancel">Cancel</a>
+    </div>
     <script src="javascript/app.js"></script>
   </body>
 </html>
