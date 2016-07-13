@@ -15,7 +15,8 @@ var canvasBody = window.document.getElementById("canvas"),
 
     tools = [
       "Paint", //Paints the thing
-      "Eraser" //Erases the thing (to white)
+      "Eraser",
+      "Eyedropper" //Erases the thing (to white)
     ],
 
     actions = {
@@ -71,7 +72,7 @@ Cell.prototype.place = function () {
 
 Cell.prototype.redraw = function (arg) {
   if (arg){
-    console.log(arg)
+    //console.log(arg)
     this.color = canvas.fillStyle = arg.color;
   } else {
     canvas.fillStyle = this.color;
@@ -133,13 +134,20 @@ function stumpPixel(e, todo) {
     for(var i = 0; i < pictureData.length; i++){
       pictureData[i].map( function(Cell) { Cell.place() } )
     }
+  } else if (todo == "Eyedropper") {
+    var pickedColor = pictureData[slabY][slabX].color;
+    if(pickedColor == "rgba(0,0,0,0)"){
+      pickedColor = "#ffffff";
+    }
+    document.getElementById("color_pick").jscolor.fromString(pickedColor);
+    currentColor = pickedColor;
   }
 }
 
 function updateColor(jscolor) {
-  var color = document.getElementById("color_pick").textContent;
+
   currentColor = "#" + jscolor;
-  console.log(currentColor);
+  console.log(jscolor);
 }
 
 
@@ -154,6 +162,8 @@ canvasBody.addEventListener("mousedown", function(e){
     stumpPixel(e, "Paint")
   } else if (pressing && toolNow == "Eraser") {
     stumpPixel(e, "Erase")
+  } else if (pressing && toolNow == "Eyedropper") {
+    stumpPixel(e, "Eyedropper")
   }
   console.log(e.pageX, e.pageY)
 })
@@ -169,6 +179,8 @@ canvasBody.addEventListener("mousemove", function(e){
     stumpPixel(e, "Paint")
   } else if (pressing && toolNow == "Eraser") {
     stumpPixel(e, "Erase")
+  } else if (pressing && toolNow == "Eyedropper") {
+    stumpPixel(e, "Eyedropper")
   }
 })
 

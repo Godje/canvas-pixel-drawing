@@ -152,7 +152,7 @@ canvas {
 #tool-wrapper #drawing-tools {
   display: block;
   position: relative;
-  width: 240px;
+  width: 270px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -167,6 +167,10 @@ canvas {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+#tool-wrapper #drawing-tools .tool#eyedropper {
+  width: 120px;
 }
 
 #tool-wrapper #drawing-tools .tool.selected {
