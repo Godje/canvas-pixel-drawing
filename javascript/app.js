@@ -22,7 +22,14 @@ var canvasBody = window.document.getElementById("canvas"),
       fill: function(){
         canvas.fillStyle = currentColor;
         canvas.fillRect(0,0,winW,winH);
+
         return "Filled with "+ currentColor +"";
+      },
+      wipe: function(){
+        canvas.clearRect(0,0,winW,winH);
+        for(var i = 0; i < pictureData.length; i++) {
+          pictureData[i].map( function( Cell ){ Cell.color = "rgba(0,0,0,0)"; Cell.redraw() });
+        }
       },
       clear: function(){
         canvas.clearRect(0,0,winW,winH);
@@ -59,8 +66,9 @@ Cell.prototype.place = function () {
 };
 
 Cell.prototype.redraw = function (arg) {
-  if (arg.color){
-    canvas.fillStyle = arg.color;
+  if (arg){
+    console.log(arg)
+    this.color = canvas.fillStyle = arg.color;
   } else {
     canvas.fillStyle = this.color;
   }
