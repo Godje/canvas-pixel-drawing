@@ -12,12 +12,12 @@ var canvasBody = window.document.getElementById("canvas"),
     horizontalAmount = Math.floor(winW / opts.pixelSize);
 
     pictureData = [],
+    bucketCache = [],
 
     tools = [
       "Paint", //Paints the thing
       "Eraser",
       "Eyedropper", //Erases the thing (to white)
-      "Bucket"
     ],
 
     actions = {
@@ -153,11 +153,6 @@ function stumpPixel(e, todo) {
     }
     document.getElementById("color_pick").jscolor.fromString(pickedColor);
     currentColor = pickedColor;
-  } else if (todo == "Bucket") {
-    var colorCompare = pictureData[slabY][slabX].color;
-    pictureData[slabY][slabX].redraw({color: currentColor});
-    checkNeighbor(colorCompare, slabX, slabY);
-    console.log(colorCompare);
   }
 }
 
@@ -167,15 +162,6 @@ function updateColor(jscolor) {
   console.log(jscolor);
 }
 
-function checkNeighbor(colorCompare, X, Y){
-  var arr = [];
-  if(pictureData[Y - 1][X].color == colorCompare){
-    arr.push(pictureData[Y - 1][X]);
-    var yNext = Y - 1,
-        xNext = X;
-    checkNeighbor(colorCompare, yNext, xNext)
-  }
-}
 // --
 // Pure functions
 // --
