@@ -45,7 +45,7 @@ var canvasBody = window.document.getElementById("canvas"),
     pressing = false,
     toolNow = tools[0],
 
-    currentColor = "#ff00ff";
+    currentColor = "#ff0000";
 
 function Cell(){
 
