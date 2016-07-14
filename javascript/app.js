@@ -16,7 +16,8 @@ var canvasBody = window.document.getElementById("canvas"),
     tools = [
       "Paint", //Paints the thing
       "Eraser",
-      "Eyedropper" //Erases the thing (to white)
+      "Eyedropper", //Erases the thing (to white)
+      "Bucket"
     ],
 
     actions = {
@@ -136,7 +137,7 @@ function stumpPixel(e, todo) {
       slabY = Math.round( (mouseY - (opts.pixelSize / 4)) / (winH / verticalAmount) );
 
   if (todo == "Paint") {
-    pictureData[slabY][slabX].redraw({color: currentColor});;
+    pictureData[slabY][slabX].redraw({color: currentColor});
     pictureData[slabY][slabX].color = currentColor;
 
   } else if (todo == "Erase") {
@@ -152,6 +153,11 @@ function stumpPixel(e, todo) {
     }
     document.getElementById("color_pick").jscolor.fromString(pickedColor);
     currentColor = pickedColor;
+  } else if (todo == "Bucket") {
+    var colorCompare = pictureData[slabY][slabX].color;
+    pictureData[slabY][slabX].redraw({color: currentColor});
+    checkNeighbor(colorCompare, slabX, slabY);
+    console.log(colorCompare);
   }
 }
 
@@ -161,8 +167,17 @@ function updateColor(jscolor) {
   console.log(jscolor);
 }
 
+function checkNeighbor(colorCompare, X, Y){
+  var arr = [];
+  if(pictureData[Y - 1][X].color == colorCompare){
+    arr.push(pictureData[Y - 1][X]);
+    var yNext = Y - 1,
+        xNext = X;
+    checkNeighbor(colorCompare, yNext, xNext)
+  }
+}
 // --
-// Help functions
+// Pure functions
 // --
 
 function typeOf(arg){
@@ -181,6 +196,8 @@ canvasBody.addEventListener("mousedown", function(e){
     stumpPixel(e, "Erase")
   } else if (pressing && toolNow == "Eyedropper") {
     stumpPixel(e, "Eyedropper")
+  } else if (pressing && toolNow == "Bucket") {
+    stumpPixel(e, "Bucket")
   }
   console.log(e.pageX, e.pageY)
 })

@@ -17,12 +17,13 @@
     <div id="tool-wrapper">
       <button id="color_pick" class="jscolor {valueElement:null,value:'ff00ff',onFineChange:'updateColor(this)'}"></button>
       <div id="arrow"><span class="fa fa-chevron-right"></span></div>
-      <div id="drawing-tools">
-        Tool:
-        <div class="tool selected" id="paint">Paint</div>
-        <div class="tool" id="eraser">Eraser</div>
-        <div class="tool" id="eyedropper">Eyedropper</div>
-      </div>
+      <nav id="drawing-tools">
+        <p><span class="fa fa-chevron-down" style="margin-right: 8px"></span>  Tools: </p>
+        <li class="tool selected" id="paint">Paint</li>
+        <li class="tool" id="eraser">Eraser</li>
+        <li class="tool" id="eyedropper">Eyedropper</li>
+        <li class="tool" id="bucket">Bucket</li>
+      </nav>
       <a href="#" id="settings-btn" class="remodals" data-remodal-target="modal-settings">
         <div class="fa fa-cog"></div> Settings
       </a>
