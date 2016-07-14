@@ -116,16 +116,14 @@ function restartApp(arg){
 
   startApp(verticalAmount, horizontalAmount);
   console.log("App reinitialized")
-}
+};
 
 function finishApp(){
   actions.clear();
   actions.wipe();
   pictureData = [];
   console.log("App finished. All entities removed")
-}
-
-startApp(verticalAmount, horizontalAmount)
+};
 
 function stumpPixel(e, todo) {
   var mouseX = e.pageX,
@@ -159,13 +157,13 @@ function stumpPixel(e, todo) {
     checkNeighbor(colorCompare, slabX, slabY);
     console.log(colorCompare);
   }
-}
+};
 
 function updateColor(jscolor) {
 
   currentColor = "#" + jscolor;
   console.log(jscolor);
-}
+};
 
 function checkNeighbor(colorCompare, X, Y){
   var arr = [];
@@ -175,14 +173,14 @@ function checkNeighbor(colorCompare, X, Y){
         xNext = X;
     checkNeighbor(colorCompare, yNext, xNext)
   }
-}
+};
 // --
 // Pure functions
 // --
 
 function typeOf(arg){
   return typeof arg;
-}
+};
 
 // --
 // EVENT CONTROLLERS
@@ -200,12 +198,12 @@ canvasBody.addEventListener("mousedown", function(e){
     stumpPixel(e, "Bucket")
   }
   console.log(e.pageX, e.pageY)
-})
+});
 
 canvasBody.addEventListener("mouseup", function(e){
   pressing = false;
   console.log(e.pageX, e.pageY)
-})
+});
 
 //If the mouse is moving and it is clicked that will call the redraw function on each Cell that is in the range
 canvasBody.addEventListener("mousemove", function(e){
@@ -216,7 +214,7 @@ canvasBody.addEventListener("mousemove", function(e){
   } else if (pressing && toolNow == "Eyedropper") {
     stumpPixel(e, "Eyedropper")
   }
-})
+});
 
 
 var toolBoardBody = $("#tool-wrapper"),
@@ -239,7 +237,7 @@ tool_tool.on("click", function(){
 
   toolChange($(this).attr("id"));
   console.log($(this).attr("id"))
-})
+});
 
 function toolChange(tool){
   for (var i = 0; i < tools.length; i++) {
@@ -248,7 +246,7 @@ function toolChange(tool){
     }
   }
   console.log(toolNow)
-}
+};
 
 function callRestart(){
   var new_pixelSize = $("#pixel_size_input").val();
@@ -256,4 +254,6 @@ function callRestart(){
   console.log(new_pixelSize);
   restartApp({pixelSize: new_pixelSize});
 
-}
+};
+
+startApp(verticalAmount, horizontalAmount);
