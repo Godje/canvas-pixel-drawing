@@ -14,6 +14,7 @@ var canvasBody = window.document.getElementById("canvas"),
     pictureData = [],
     bucketCache = [],
 
+
     tools = [
       "Paint", //Paints the thing
       "Eraser",
@@ -44,6 +45,7 @@ var canvasBody = window.document.getElementById("canvas"),
 
     pressing = false,
     toolNow = tools[0],
+
 
     currentColor = "#ff0000";
 
@@ -241,5 +243,28 @@ function callRestart(){
 
   console.log(new_pixelSize);
   restartApp({pixelSize: new_pixelSize});
+}
 
+// --
+// Color saving/deleting/applying functions
+// --
+
+function saveColor(){
+  var new_saved_color = document.createElement("li"),
+      new_color = document.getElementById("color_pick").jscolor
+
+  new_saved_color.className = "saved-color";
+  new_saved_color.innerHTML = "<div class='color' style='background-color: #"+ new_color +"'></div> #"+ new_color +"<div class='remove-btn' onClick='removeColor(this)'></div>";
+  new_saved_color.setAttribute("onclick", "applySavedColor(this)");
+
+  $("#saved-colors_holder").append(new_saved_color);
+}
+function removeColor(el){
+  var thisParent = el.parentNode;
+  thisParent.parentNode.removeChild(thisParent);
+}
+function applySavedColor(el){
+  var thisColorValue = el.firstChild.style.backgroundColor;
+  document.getElementById("color_pick").jscolor.fromString(thisColorValue);
+  currentColor = thisColorValue;
 }

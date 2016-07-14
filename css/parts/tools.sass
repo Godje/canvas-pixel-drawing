@@ -118,3 +118,81 @@
 
       &:hover
         background-color: darken($fl-red, 5%)
+
+  #save-color_btn
+    &:hover
+      background-color: rgba(0,0,0,0.05)
+
+  #saved-colors_holder
+    width: 150px
+    height: 50px
+    max-height: 50px
+
+    overflow: hidden
+    list-style: none
+
+    display: block
+    position: relative
+
+    &:hover
+      max-height: 100vh
+      overflow: visible
+
+    li
+      display: flex
+      flex-direction: row
+      justify-content: center
+      align-items: center
+      width: 100%
+      height: 50px
+
+      background-color: $fl-red
+      &.saved-color
+        position: relative
+        overflow: visible
+        &:hover
+          background-color: $fl-lred
+          cursor: pointer
+
+          .remove-btn
+            left: 100%
+            opacity: 1
+
+        .color
+          width: 20px
+          height: 20px
+          margin-right: 15px
+
+          background-color: black
+          border-radius: 50%
+
+        .remove-btn
+          width: 20px
+          height: 20px
+          position: absolute
+          display: block
+          top: 50%
+          left: calc(100% - 10px)
+          transition: left 0.1s linear, opacity 0.1s linear
+
+          opacity: 0
+
+          transform: translateY(-50%)
+
+          &::before, &::after
+            content: ""
+            width: 20px
+            height: 2px
+            background-color: $fl-red
+            position: absolute
+
+            top: 50%
+            left: 50%
+
+            transform: translateX(-50%) translateY(-50%)
+
+          &::before
+            transform: translateX(-50%) translateY(-50%) rotateZ(45deg)
+
+          &::after
+            transform: translateX(-50%) translateY(-50%) rotateZ(-45deg)

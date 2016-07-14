@@ -16,6 +16,13 @@
   <body>
     <div id="tool-wrapper">
       <button id="color_pick" class="jscolor {valueElement:null,value:'ff0000',onFineChange:'updateColor(this)'}"></button>
+      <div id="save-color_btn" onClick="saveColor()">
+        <div class="fa fa-heart"></div>Save color
+      </div>
+      <nav id="saved-colors_holder">
+        <li disabled><div class="fa fa-chevron-down"></div> Saved colors: </li>
+
+      </nav>
       <div id="arrow"><span class="fa fa-chevron-right"></span></div>
       <nav id="drawing-tools">
         <p><span class="fa fa-chevron-down" style="margin-right: 8px"></span>  Tools: </p>
@@ -23,6 +30,7 @@
         <li class="tool" id="eraser">Eraser</li>
         <li class="tool" id="eyedropper">Eyedropper</li>
       </nav>
+
       <a href="#" id="settings-btn" class="remodals" data-remodal-target="modal-settings">
         <div class="fa fa-cog"></div> Settings
       </a>
@@ -32,6 +40,7 @@
         <li class="action" onClick="actions.fill()">Fill</li>
       </nav>
     </div>
+
     <canvas id="canvas"></canvas>
     <div class="modal_window remodal" data-remodal-id="modal-settings">
       <a href="#" data-remodal-action="close" class="modal-close"></a>
